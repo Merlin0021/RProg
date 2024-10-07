@@ -1,0 +1,127 @@
+---
+title: "Rworksheet#3b"
+author: "Jhon Albert Paclibar"
+date: "2024-10-07"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+#1. Create a data frame using the table below.
+#a
+```{r}
+data <- data.frame(
+Respondents = 1:20,
+Sex = c(2, 1, 2, 2, 1, 1, 2, 2, 2, 1, 1, 2, 2, 1, 2, 2, 1, 2, 1, 2),
+FathersOccupation = c(1, 2, 3, 1, 2, 1, 3, 2, 3, 3, 1, 3, 2, 1, 3, 1, 3, 3, 1, 1),
+PersonsAtHome = c(5, 7, 3, 5, 5, 3, 6, 6, 7, 7, 3, 7, 4, 7, 8, 8, 3, 11, 8, 6),
+SiblingsAtSchool = c(6, 4, 3, 2, 3, 3, 5, 5, 4, 5, 3, 7, 5, 2, 1, 3, 1, 5, 3, 2),
+TypesOfHouses = c(1, 2, 3, 1, 3, 1, 3, 3, 3, 1, 3, 3, 3, 1, 3, 3, 3, 3, 3, 2)
+)
+data
+```
+#b
+```{r}
+str(data)
+summary(data)
+```
+#c
+```{r}
+mean(data$SiblingsAtSchool)
+```
+#d
+```{r}
+data[1:2, ]
+```
+#e
+```{r}
+data[c(3, 5), c(2, 4)]
+```
+#f
+```{r}
+types_houses <- data$TypesOfHouses
+types_houses
+```
+#g
+```{r}
+MFarmers <- subset(data, Sex == 1 & FathersOccupation == 1)
+MFarmers
+```
+#h
+```{r}
+FemaleSiblings <- subset(data, Sex == 2 & SiblingsAtSchool >= 5)
+FemaleSiblings
+```
+#2. Write a R program to create an empty data frame. Using the following codes:
+```{r}
+df = data.frame(Ints=integer(),
+
+Doubles=double(), Characters=character(),
+Logicals=logical(),
+Factors=factor(),
+stringsAsFactors=FALSE)
+
+print("Structure of the empty dataframe:")
+print(str(df))
+```
+#a. Describe the results: 
+#The data frame is empty, it also contains 5 columns which is integers, doubles, characters, logicals, and factors.
+#3. Create a .csv file of this. Save it as HouseholdData.csv
+```{r}
+houseData <- read.csv("HouseholdData.csv")
+```
+#b
+```{r}
+houseData$Sex <- factor(houseData$Sex, levels = c("Male", "Female"), labels = c(1, 2))
+houseData$Sex <- as.integer(houseData$Sex)
+houseData
+```
+#c
+```{r}
+houseData$Type.of.Houses <- factor(houseData$Type.of.Houses, levels = c("Wood", "Semi-Congrete", "Congrete"),labels = c(1, 2, 3))
+houseData$Type.of.Houses <- as.integer(houseData$Type.of.Houses)
+houseData
+```
+#d
+
+
+houseData$Fathers.Occupation <- factor(HouseData$Fathers.Occupation, levels = c("Farmer", "Driver", "Others"),labels = c(1,2,3))
+houseData
+
+
+#e
+```{r}
+FemaleDriver <- subset(houseData, Sex == 2 & Fathers.Occupation =="Driver")
+FemaleDriver
+```
+#f
+```{r}
+moresiblings <- subset(houseData, Respondents & Siblings.at.School >= 5)
+moresiblings
+```
+#4. Interpret the graph.
+#The graph shows the number of sentiments of tweets from July 14 to July 21 year 2020. The graph shows the sentiments of the people wether they are negative, positive, or neutral about their tweet. 
