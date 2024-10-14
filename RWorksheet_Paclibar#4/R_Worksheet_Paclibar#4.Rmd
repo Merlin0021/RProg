@@ -1,0 +1,113 @@
+---
+title: "RWorksheet_Paclibar#4a"
+author: "Jhon Albert B. Paclibar"
+date: "2024-10-14"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+#1. The table below shows the data about shoe size and height. Create a data frame.
+
+```{r}
+Shoe_size <- c(6.7,9.0,8.5,8.5,10.5,7.0,9.5,9.0,13.0,7.5,10.5,8.5,12.0,10.5, 13.0,11.5,8.5,5.0,10.0,6.5,7.5,8.5,10.5,8.5,10.5,11.0,9.0,13.0)
+Height <- c(66.0,68.0,64.5,65.0,70.0,64.0,70.0,71.0,72.0,64.0,74.5,67.0,71.0,71.0,77.0,72.0,59.0,62.0,72.0,66.0,64.0,67.0,73.0,69.0,72.0,70.0,69.0,70.0)
+Gender <- c("F","F","F","F","M","F","F","F","M","F","M","F","M","M","M","M","F","F","M","F","F","M","M","F","M","M","M","M")
+ShoeInfo <- data.frame(Shoe_size,Height,Gender)
+print(ShoeInfo)
+```
+#a. Describe the data.
+#The data shows the shoe size, height, and the gender of the people.
+
+#b. Create a subset by males and females with their corresponding shoe size and height.What its result? Show the R scripts.
+```{r}
+msd <- subset(ShoeInfo , Gender == "M")
+msd
+fsd <- subset(ShoeInfo , Gender == "F")
+fsd
+```
+#c. Find the mean of shoe size and height of the respondents. Write the R scripts and its result.
+```{r}
+means <- mean(ShoeInfo$Shoe_size)
+means
+
+meanh <- mean(ShoeInfo$Height)
+meanh
+```
+#d. Is there a relationship between shoe size and height? Why?
+#Yes, Because the taller you are the bigger the size of your feet.
+
+#2. Construct character vector months to a factor with factor() and assign the result tofactor_months_vector. Print out factor_months_vector and assert that R prints out the factor levels below the actual values.
+
+```{r}
+months <- c("March","April","January","November","January",
+"September","October","September","November","August",
+"January","November","November","February","May","August","July","December","August","August","September","November","February",
+"April")
+factor_months_vector <- factor(months)
+factor_months_vector
+```
+#Then check the summary() of the months_vector and factor_months_vector. | Inter-pret the results of both vectors. Are they both equally useful in this case?
+```{r}
+summary(months)
+```
+```{r}
+summary(factor_months_vector)
+```
+#4. Create a vector and factor for the table below.
+```{r}
+direction <- c("East","West","North")
+frequency <- c(1,4,3)
+factor_data <- factor(direction, levels = c("East", "West", "North"))
+factor_data
+```
+#5. Enter the data below in Excel with file name = import_march.csv
+```{r}
+import_march <- read.csv("import_march.csv")
+import_march
+```
+#a. Import the excel file into the Environment Pane using read.table() function. Write the code.
+```{r}
+read_table  <- read.table("import_march.csv",header = TRUE, sep = ",")
+read_table
+```
+#b. View the dataset. Write the R scripts and its result.
+```{r}
+import_march
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
