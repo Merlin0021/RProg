@@ -2,7 +2,9 @@
 title: "RWorksheet_Paclibar#4a"
 author: "Jhon Albert B. Paclibar"
 date: "2024-10-14"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -97,6 +99,92 @@ read_table
 ```{r}
 import_march
 ```
+
+#6. Full Search
+#Exhaustive search is a methodology for finding an answer by exploring all possible cases When trying to find a desired number in a set of given numbers, the method of finding the corresponding number by checking all elements in the set one by one can be called an exhaustive search. Implement an exhaustive search function that meets the input/output conditions below.
+#a. Create an R Program that allows the User to randomly select numbers from 1 to 50.Then display the chosen number. If the number is beyond the range of the selected choice,it will have to display a string “The number selected is beyond the range of 1 to 50”. If number 20 is inputted by the User, it will have to display “TRUE”, otherwise display the input number.
+```{r}
+NumSel <- readline(prompt="Enter number: ")
+
+if(NumSel <= 50){
+  NumSel
+  if (NumSel == 20){
+  print("TRUE")
+  }else{
+    NumSel
+  }
+}else{
+  print("The number selected is beyond the range of 1 to 50")
+}
+
+```
+#7. Change
+#At ISATU University’s traditional cafeteria, snacks can only be purchased with bills. Along-standing rule at the concession stand is that snacks must be purchased with as few coins as possible. There are three types of bills: 50 pesos, 100 pesos, 200 pesos, 500 pesos,1000 pesos. a. Write a function that prints the minimum number of bills that must be paid, given the price of the snack. Input: Price of snack (a random number divisible by 50) Output: Minimum number of bills needed to purchase a snack.
+```{r}
+snackPrice<-readline(prompt = "Enter Amount: ")
+if (snackPrice == 50){
+  print("The minimum bill is : 100")
+}else if(snackPrice == 100){
+  print("The minimum bill is : 100")
+}else if(snackPrice == 200){
+  print("The minimum bill is : 200")
+}else if(snackPrice == 500){
+  print("The minimum bill is : 500")
+}else if(snackPrice == 1000){
+  print("The minimum bill is : 1000")
+}else{
+  print("The number is not divisible by 50")
+}
+```
+#8. The following is each student’s math score for one semester. Based on this, answer the following questions.
+#a. Create a dataframe from the above table. Write the R codes and its output.
+```{r}
+Name<- c("Annie", "Thea", "Steve", "Anna")
+Grade1<- c(85, 65, 75, 95)
+Grade2 <- c(65, 75, 55, 75)
+Grade3<-c(85, 90, 80, 100)
+Grade4<- c (100, 90, 85, 90)
+
+Students <- data.frame(Name, Grade1, Grade2, Grade3, Grade4)
+Students
+
+```
+#b. Without using the rowMean function, output the average score of students whose average math score over 90 points during the semester. write R code and its output.
+```{r}
+for (i in 1:nrow(Students)) {
+  avg_score <- (Students[i, "Grade1"] + Students[i, "Grade2"] + Students[i, "Grade3"] + Students[i, "Grade4"]) / 4
+  if (avg_score > 90) {
+    cat(sprintf("%s's average grade this semester is %.2f. ", Students[i, "Name"], avg_score))
+  }
+}
+
+```
+
+#c.Without using the mean function, output as follows for the tests in which the average score was less than 80 out of 4 tests.
+```{r}
+test_averages <- colMeans(Students[2:5])
+
+# Check for tests with average less than 80
+for (j in 1:length(test_averages)) {
+  if (test_averages[j] < 80) {
+    cat(sprintf("The %dnd test was difficult.\n", j))
+  }
+}
+```
+```{r}
+for (i in 1:nrow(Students)) {
+  highest_score <- Students[i, 2:5][1]
+  for (j in 2:4) {
+    if (Students[i, j + 1] > highest_score) {
+      highest_score <- Students[i, j + 1]
+    }
+  }
+  if (highest_score > 90) {
+    cat(sprintf("%s’s highest grade this semester is %d.\n", Students$Name[i], highest_score))
+  }
+}
+```
+
 
 
 
