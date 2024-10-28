@@ -1,0 +1,164 @@
+---
+title: "RWorksheet_Paclibar#4b"
+author: "Jhon Albert Paclibar"
+date: "2024-10-28"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+#1. Using the for loop, create an R script that will display a 5x5 matrix as shown in
+#Figure 1. It must contain vectorA = [1,2,3,4,5] and a 5 x 5 zero matrix.
+```{r}
+result_matrix <- matrix(0, nrow = 5, ncol = 5)
+
+for (i in 0:4) {
+  for (j in 0:4) {
+    result_matrix[i + 1, j + 1] <- abs(i - j)
+  }
+}
+print(result_matrix)
+```
+#2. Print the string "*" using for() function. The output should be the same as shown in Figure
+
+```{r}
+for(i in 1:5){
+ cat(rep("*", i), "\n")
+}
+```
+#3. Get an input from the user to print the Fibonacci sequence starting from the 1st input up to 500. Use repeat and break statements. Write the R Scripts and its output.
+```{r}
+start_value <- 1
+
+fib1 <- 0
+fib2 <- 1
+
+repeat {
+  fib_next <- fib1 + fib2
+  if (fib_next >= start_value) {
+    cat(fib_next, "\n")
+  }
+  if (fib_next > 500) {
+    break
+  }
+  
+  fib1 <- fib2
+  fib2 <- fib_next
+}
+
+```
+#a. What is the R script for importing an excel or a csv file? Display the first 6 rows of the dataset? Show your codes and its result
+```{r}
+ShoeSize <- read.csv("ShoeSize.csv")
+ShoeSize
+  
+```
+#b. Create a subset for gender(female and male). How many observations are there in Male? How about in Female? Write the R scripts and its output.
+```{r}
+maleSubset <- subset(ShoeSize, Gender == "M")
+femaleSubset <- subset(ShoeSize, Gender == "F")
+
+numMale <- nrow(maleSubset)
+numFemale <- nrow(femaleSubset)
+
+cat("Number of Male observations:", numMale, "\n")
+cat("Number of Female observations:", numFemale, "\n")
+```
+#c. Create a graph for the number of males and females for Household Data. Use plot(),chart type = barplot. Make sure to place title, legends, and colors. Write the R scripts and its result.
+```{r}
+
+genderCount <- c(Male = numMale, Female = numFemale)
+barColors <- c("blue","pink")
+SGender<-barplot(genderCount, main = "Number of Males and Females in the data", xlab = "Gender", ylab = "Count",col = barColors,legend = rownames(genderCount),beside = TRUE)
+SGender
+```
+#5. The monthly income of Dela Cruz family was spent on the following:
+```{r}
+Food <- 60
+Electricity <- 10
+Savings <- 5
+Miscellanous <- 25
+delaCruz <- data.frame(Food, Electricity, Savings, Miscellanous)
+delaCruz
+  
+```
+#a. Create a piechart that will include labels in percentage.Add some colors and title of the chart. Write the R scripts and show its output.
+```{r}
+dela <-pie(c(Food, Electricity, Savings, Miscellanous), 
+    labels = c("Food", "Electricity", "Savings", "Miscellanous"), 
+    main = "Dela Cruz family monthly spending", 
+    col = c("green", "blue", "pink", "yellow"),
+    radius = 1)
+dela
+```
+#6. Use the iris dataset.
+```{r}
+data(iris)
+```
+#a. Check for the structure of the dataset using the str() function. Describe what you have seen in the output.
+```{r}
+str(iris)
+```
+#It shows the data about the iris flower inlcuding the length and width of the petals and sepal. It also shows the species of the irises.
+
+#b. Create an R object that will contain the mean of the sepal.length, sepal.width,petal.length,and petal.width. What is the R script and its result?
+```{r}
+lengthNwidth <- colMeans(iris[, 1:4])
+lengthNwidth
+```
+#c. Create a pie chart for the Species distribution. Add title, legends, and colors. Write the R script and its result.
+```{r}
+speciesCounts <- table(iris$Species)
+
+PieS <- pie(speciesCounts, 
+    labels = paste(names(speciesCounts), "\n", speciesCounts), 
+    main = "Species in Iris Dataset", 
+    col = c("red", "blue", "violet"), 
+    radius = 1)
+PieS
+```
+#d. Subset the species into setosa, versicolor, and virginica. Write the R scripts and show the last six (6) rows of each species.
+```{r}
+setosa <- subset(iris, Species == "setosa")
+versicolor <- subset(iris, Species == "versicolor")
+virginica <- subset(iris, Species == "virginica")
+Seeto<-tail(setosa)
+Veersi<- tail(versicolor)
+Viirgi<- tail(virginica)
+Seeto
+Veersi
+Viirgi
+```
+#e. Create a scatterplot of the sepal.length and sepal.width using the differentspecies(setosa,versicolor,virginica). Add a title = “Iris Dataset”, subtitle = “Sepal width and length, labels for the x and y axis, the pch symbol and colors should be based on the species.
+```{r}
+plot(iris$Sepal.Length, iris$Sepal.Width, main = "Iris Dataset", sub = "Sepal width and length", xlab = "Sepal Length", ylab = "Sepal Width", pch = 19, col = iris$Species)
+legend("topright", legend = levels(iris$Species), pch = 19, col = 1:3)
+```
+#f. Interpret the result.
+#The result seperates the 3 species by color to easily identify them and also to mark the locations on where the species can be seen.
+
+
+#7. Import the alexa-file.xlsx. Check on the variations. Notice that there are ex-tra whitespaces among black variants (Black Dot, Black Plus, Black Show, Black Spot). Also on the white variants (White Dot, White Plus, White Show, White     Spot).
